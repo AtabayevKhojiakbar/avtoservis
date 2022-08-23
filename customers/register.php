@@ -13,13 +13,14 @@
         $prce = mysqli_fetch_assoc($prc);
         $id_prc = $prce['id'];
         $prc_sum = $prce['price'];
+        $payed = 0;
         if($id_emp%2==0) {
             $sale = 10;
-            $payed = $prc_sum * 0.9;
+
         }
         else {
             $sale = 5;
-            $payed = $prc_sum * 0.95;
+
         }
 
         $sql = "insert into customers(car_number, employee_id, price_id, paysum, sale, payedsum) values ('$car', '$id_emp', '$id_prc', '$prc_sum', '$sale', '$payed');";

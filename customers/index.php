@@ -29,7 +29,10 @@ include "../nav.php";
         <th scope="col">payedsum</th>
         <th scope="col">status</th>
         <th scope="col">date</th>
-        <th scope="col"><a href="register.php" class="btn btn-success"> Qo`shish </a></th>
+        <th scope="col">
+            <a href="register.php" class="btn btn-success"> Qo`shish </a>
+            <a class="btn btn-success" href="search.php">To'lov qilish</a>
+        </th>
     </tr>
     <?php  if($result->num_rows>0){
         while ($rows=mysqli_fetch_assoc($result)){
