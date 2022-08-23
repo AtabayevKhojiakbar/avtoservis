@@ -28,10 +28,11 @@ include "../nav.php";
         <th scope="col">sale</th>
         <th scope="col">payedsum</th>
         <th scope="col">status</th>
+        <th scope="col">bonus</th>
         <th scope="col">date</th>
         <th scope="col">
             <a href="register.php" class="btn btn-success"> Qo`shish </a>
-            <a class="btn btn-success" href="search.php">To'lov qilish</a>
+            <a class="btn btn-success" href="qidiruv.php">To'lov qilish</a>
         </th>
     </tr>
     <?php  if($result->num_rows>0){
@@ -46,6 +47,7 @@ include "../nav.php";
         <th><?php echo $rows['sale']; ?></th>
         <th><?php echo $rows['payedsum']; ?></th>
         <th><?php echo $rows['status']; ?></th>
+        <th><?php echo $rows['bonus']; ?></th>
         <th><?php echo $rows['date']; ?></th>
     </tr>
     <?php
