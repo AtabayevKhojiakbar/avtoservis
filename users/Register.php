@@ -130,10 +130,10 @@ else
                 $sql="select * from Users where email='$Email'";
                 $result=mysqli_query($connection,$sql);
                 $user=mysqli_fetch_assoc($result);
-                $Pass=$user['password'];
-                $Pass2=md5("$Pass",false);
                 if(mysqli_num_rows($result)!=0)
                 {
+                    $Pass=$user['password'];
+                    $Pass2=md5("$Pass",false);
                     if($Pass1==$Pass2)
                     {
                         $ip="".getHostByName6('fix6.net') . PHP_EOL;
