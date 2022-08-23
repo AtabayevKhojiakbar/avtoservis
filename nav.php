@@ -9,7 +9,7 @@
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="/avtoservis/customers/index.php">Navbat</a>
                 <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="/avtoservis/prices/index.php">Narxlar</a>
+                <a class="nav-link" href="/avtoservis/prices/index.php">Servis</a>
                 <a class="nav-link disabled">Disabled</a>
             </div>
         </div>

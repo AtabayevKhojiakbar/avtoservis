@@ -19,7 +19,7 @@ $result = mysqli_query($connection,$sql);
 
 
 <div class="card">
-    <h1 align="center" class="text text-primary">Narxlar ro'yhati</h1>
+    <h1 align="center" class="text text-primary">Servis xizmati</h1>
 </div>
 <div class="container w-90 card">
     <div class="d-flex justify-content-end"><a href="add.php" class="btn btn-success">Ma'lumot qo'shish</a></div>

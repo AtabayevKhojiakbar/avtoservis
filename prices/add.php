@@ -27,7 +27,7 @@ if(isset($_POST['name'])){
 <div class="">
     <h1 class="text text-primary " align="center">Ma'lumot qo'shish</h1><br>
     <div class="container">
-        <a href="index.php" class="btn btn-primary">Narxlar ro'yhati</a>
+        <a href="index.php" class="btn btn-primary">Orqaga</a>
             <form action="" method="post" class="w-50">
 
                 <div class="mb-3">
