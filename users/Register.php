@@ -1,22 +1,6 @@
 <?php
 require_once "connection.php";
-$location='Menyu.php';
-function getHostByName6($input)
-{
-    $temp = dns_get_record($input, DNS_AAAA);
-    if (isset($temp[0]['ipv6']))
-        return $temp[0]['ipv6'];
-    return false;
-}
-$ip="".getHostByName6('fix6.net') . PHP_EOL;
-$sql="select * from userip where ip='$ip'";
-$result=mysqli_query($connection,$sql);
-if(mysqli_num_rows($result)!=0)
-{
-    header("location: $location");
-}
-else
-{
+$location='../navbar.php';
     $a=false;
     $name="";
     $email="";
@@ -49,9 +33,6 @@ else
                         {
                             $sql = "insert into Users(name,email,password) values ('$name','$email','$pas1')";
                             $result = mysqli_query($connection, $sql);
-                            $ip="".getHostByName6('fix6.net') . PHP_EOL;
-                            $sql="insert into userip(ip) values ('$ip')";
-                            mysqli_query($connection,$sql);
                             header("location: $location");
                         }
                         elseif($pas1==$pas2)
@@ -94,9 +75,6 @@ else
                         $Pass2=md5("$Pass",false);
                         if($Pass1==$Pass2)
                         {
-                            $ip="".getHostByName6('fix6.net') . PHP_EOL;
-                            $sql="insert into userip(ip) values ('$ip')";
-                            mysqli_query($connection,$sql);
                             header("location: $location");
                         }
                         else
@@ -136,9 +114,6 @@ else
                     $Pass2=md5("$Pass",false);
                     if($Pass1==$Pass2)
                     {
-                        $ip="".getHostByName6('fix6.net') . PHP_EOL;
-                        $sql="insert into userip(ip) values ('$ip')";
-                        mysqli_query($connection,$sql);
                         header("location: $location");
                     }
                     else
@@ -257,5 +232,5 @@ else
     </body>
     </html>
 <?php
-}
-?>
+//}
+//?>
