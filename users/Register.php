@@ -11,8 +11,7 @@ $Password="";
 $messenger="";
 if(isset($_GET['a']))
 {
-    $if=$_GET['a'];
-    if($if=='Registratsiya')
+    if($_GET['a']=='Registratsiya')
     {
         $a=true;
         if(isset($_POST['email']))
