@@ -1,5 +1,5 @@
 <?php
-require_once "connection.php";
+require_once "conn.php";
 $location='../customers/index.php';
 $a=false;
 $name="";
@@ -9,14 +9,14 @@ $pas2="";
 $Email="";
 $Password="";
 $messenger="";
-//$MAC = exec('getmac');
-//$MAC = strtok($MAC, ' ');
-//$sql="Select * from userip where mac='$MAC'";
-//$result=mysqli_query($connection,$sql);
-//if(mysqli_num_rows($result)!=0)
-//{
-//    header("location: $location");
-//}
+$MAC = exec('getmac');
+$MAC = strtok($MAC, ' ');
+$sql="Select * from userip where mac='$MAC'";
+$result=mysqli_query($conn,$sql);
+if(mysqli_num_rows($result)!=0)
+{
+    header("location: $location");
+}
 if(isset($_GET['a']))
 {
     $if=$_GET['a'];
@@ -34,15 +34,15 @@ if(isset($_GET['a']))
             if($e=="@avtoservis.com")
             {
                 $sql="select * from Users where email='$email'";
-                $result=mysqli_query($connection,$sql);
+                $result=mysqli_query($conn,$sql);
                 if(mysqli_num_rows($result)==0)
                 {
                     if($pas1==$pas2 and strlen($pas1)>=8)
                     {
-//                        $sql="Insert into from userip(mac) valuse ('$MAC')";
-//                        mysqli_query($connection,$sql);
+                        $sql="Insert into userip(mac,email) values ('$MAC','$email')";
+                        mysqli_query($conn,$sql);
                         $sql = "insert into Users(name,email,password) values ('$name','$email','$pas1')";
-                        $result = mysqli_query($connection, $sql);
+                        $result = mysqli_query($conn, $sql);
                         header("location: $location");
                     }
                     elseif($pas1==$pas2)
@@ -77,7 +77,7 @@ if(isset($_GET['a']))
             if($e=="@avtoservis.com")
             {
                 $sql="select * from Users where email='$Email'";
-                $result=mysqli_query($connection,$sql);
+                $result=mysqli_query($conn,$sql);
                 $user=mysqli_fetch_assoc($result);
                 if(mysqli_num_rows($result)!=0)
                 {
@@ -85,8 +85,8 @@ if(isset($_GET['a']))
                     $Pass2=md5("$Pass",false);
                     if($Pass1==$Pass2)
                     {
-//                        $sql="Insert into userip(mac) values ('$MAC')";
-//                        mysqli_query($connection,$sql);
+                        $sql="Insert into userip(mac,email) values ('$MAC','$Email')";
+                        mysqli_query($conn,$sql);
                         header("location: $location");
                     }
                     else
@@ -119,7 +119,7 @@ else
         if($e=="@avtoservis.com")
         {
             $sql="select * from Users where email='$Email'";
-            $result=mysqli_query($connection,$sql);
+            $result=mysqli_query($conn,$sql);
             $user=mysqli_fetch_assoc($result);
             if(mysqli_num_rows($result)!=0)
             {
@@ -127,8 +127,8 @@ else
                 $Pass2=md5("$Pass",false);
                 if($Pass1==$Pass2)
                 {
-//                    $sql="Insert into from userip(mac) values ('$MAC')";
-//                    mysqli_query($connection,$sql);
+                    $sql="Insert into userip(mac,email) values ('$MAC','$Email')";
+                    mysqli_query($conn,$sql);
                     header("location: $location");
                 }
                 else

@@ -1,4 +1,5 @@
 <?php
+require_once "../users/connection.php";
 include 'connect.php';
 include '../nav.php'
 ?>

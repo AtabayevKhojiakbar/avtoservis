@@ -1,5 +1,5 @@
 <?php
-
+require_once "../users/connection.php";
 include 'connect.php';
 $id = $_GET['updateid'];
 $sql = "Select * from `employees` where id =$id";

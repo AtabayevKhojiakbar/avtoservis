@@ -9,6 +9,7 @@
                 <a class="nav-link  active" aria-current="page" href="/avtoservis/customers/index.php">Navbat</a>
                 <a class="nav-link active" href="/avtoservis/employes/ishchilar.php">Ishchilar</a>
                 <a class="nav-link active" href="/avtoservis/prices/index.php">Servis</a>
+                <a class="nav-link active" style="color: red" href="/avtoservis/users/LogOut.php?id=5">LogOut</a>
             </div>
 
     </div>
