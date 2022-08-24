@@ -1,17 +1,19 @@
 <?php
 
 require_once "../users/connection.php";
-$ishladi = false;
-$message = '';
+
 
 if(isset($_POST['name'])){
     $ishladi = true;
     $name = $_POST['name'];
     $price = $_POST['price'];
     $sql = "INSERT INTO prices(name,price) values ('$name','$price')";
-    $ishladi = mysqli_query($connection,$sql);
-    if($ishladi){
-        $message = "Ma'lumot qo'shildi";
+    $result = mysqli_query($connection,$sql);
+    if($result){
+        header("location:index.php");
+    }
+    else{
+        echo mysqli_error();
     }
 }
 
@@ -50,13 +52,7 @@ if(isset($_POST['name'])){
 
             </form>
 
-        <?php
-        if($ishladi){
-        ?>
-        <h3 class="text"><?php echo $message ?></h3>
-        <?php
-        }
-        ?>
+
 
     </div>
 </div>
