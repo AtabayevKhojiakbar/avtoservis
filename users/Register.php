@@ -1,6 +1,6 @@
 <?php
 require_once "connection.php";
-$location='../navbar.php';
+$location='../customers/index.php';
 $a=false;
 $name="";
 $email="";
@@ -112,6 +112,7 @@ else
 {
     if(isset($_POST['Email']))
     {
+
         $Email=$_POST['Email'];
         $Password=$_POST['Password'];
         $Pass1=md5($Password,false);

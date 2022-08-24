@@ -2,11 +2,19 @@
 
 require_once "../users/connection.php";
 
+
 if(isset($_POST['name'])){
+    $ishladi = true;
     $name = $_POST['name'];
     $price = $_POST['price'];
     $sql = "INSERT INTO prices(name,price) values ('$name','$price')";
-    mysqli_query($connection,$sql);
+    $result = mysqli_query($connection,$sql);
+    if($result){
+        header("location:index.php");
+    }
+    else{
+        echo mysqli_error();
+    }
 }
 
 ?>
@@ -43,6 +51,9 @@ if(isset($_POST['name'])){
                 <button type="submit" class="btn btn-primary">Ma'lumot qo'shish</button>
 
             </form>
+
+
+
     </div>
 </div>
 
