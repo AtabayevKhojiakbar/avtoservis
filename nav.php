@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="/avtoservis/customers/index.php">Navbat</a>
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="avtoservis/employes/ishchilar.php">Ishchilar</a>
                 <a class="nav-link" href="/avtoservis/prices/index.php">Servis</a>
                 <a class="nav-link disabled">Disabled</a>
             </div>
