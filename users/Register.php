@@ -17,8 +17,6 @@ $messenger="";
 //{
 //    header("location: $location");
 //}
-//else
-//{
 if(isset($_GET['a']))
 {
     $if=$_GET['a'];
@@ -248,6 +246,3 @@ else
 </h6>
 </body>
 </html>
-<?php
-//};
-//?>
