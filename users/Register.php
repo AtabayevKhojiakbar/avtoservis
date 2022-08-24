@@ -9,6 +9,16 @@ $pas2="";
 $Email="";
 $Password="";
 $messenger="";
+//$MAC = exec('getmac');
+//$MAC = strtok($MAC, ' ');
+//$sql="Select * from userip where mac='$MAC'";
+//$result=mysqli_query($connection,$sql);
+//if(mysqli_num_rows($result)!=0)
+//{
+//    header("location: $location");
+//}
+//else
+//{
 if(isset($_GET['a']))
 {
     $if=$_GET['a'];
@@ -31,6 +41,8 @@ if(isset($_GET['a']))
                 {
                     if($pas1==$pas2 and strlen($pas1)>=8)
                     {
+//                        $sql="Insert into from userip(mac) valuse ('$MAC')";
+//                        mysqli_query($connection,$sql);
                         $sql = "insert into Users(name,email,password) values ('$name','$email','$pas1')";
                         $result = mysqli_query($connection, $sql);
                         header("location: $location");
@@ -75,6 +87,8 @@ if(isset($_GET['a']))
                     $Pass2=md5("$Pass",false);
                     if($Pass1==$Pass2)
                     {
+//                        $sql="Insert into userip(mac) values ('$MAC')";
+//                        mysqli_query($connection,$sql);
                         header("location: $location");
                     }
                     else
@@ -114,6 +128,8 @@ else
                 $Pass2=md5("$Pass",false);
                 if($Pass1==$Pass2)
                 {
+//                    $sql="Insert into from userip(mac) values ('$MAC')";
+//                    mysqli_query($connection,$sql);
                     header("location: $location");
                 }
                 else
@@ -231,3 +247,6 @@ else
 </h6>
 </body>
 </html>
+<?php
+//};
+//?>
