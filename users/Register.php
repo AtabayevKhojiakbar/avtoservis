@@ -98,6 +98,7 @@ else
 {
     if(isset($_POST['Email']))
     {
+
         $Email=$_POST['Email'];
         $Password=$_POST['Password'];
         $Pass1=md5($Password,false);
