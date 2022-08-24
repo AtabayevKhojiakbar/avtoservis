@@ -159,14 +159,23 @@ else
     <title>Document</title>
 </head>
 <body>
+<style>
+    body {
+        background-image: url('AvtoServis.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
 <br>
-<h6 class="container">
+<div align="center" style="container" class="w-30">
+<h6 class="w-50" style="color: #009eff; text-shadow: 1.1px 1.1px black; caret-color: red">
     <form action="" method="post" class="w-50">
         <?php
         if($a)
         {
             ?>
-            <div class="mb-5">
+            <div class="mb-5" style="text-shadow: 0px 0px black">
                 <a href="?a=LogIn" class="container">
                     Log In
                 </a>
@@ -211,7 +220,7 @@ else
         else
         {
             ?>
-            <div class="mb-5">
+            <div class="mb-5" style="text-shadow: 0px 0px black">
                 <a href="" type="submit" class="btn btn-primary">
                     Log In
                 </a>
@@ -244,5 +253,6 @@ else
         ?>
     </form>
 </h6>
+</div>
 </body>
 </html>
