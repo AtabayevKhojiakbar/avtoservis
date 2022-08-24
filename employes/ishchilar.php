@@ -1,6 +1,5 @@
 <?php
 require_once "../users/connection.php";
-include 'connect.php';
 include '../nav.php'
 ?>
 
@@ -38,7 +37,7 @@ include '../nav.php'
         <?php
 
         $sql = "Select * from `employees`";
-        $result = mysqli_query($con,$sql);
+        $result = mysqli_query($connection,$sql);
 
         if ($result){
             while($row = mysqli_fetch_assoc($result)){

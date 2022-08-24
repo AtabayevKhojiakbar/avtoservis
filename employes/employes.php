@@ -1,6 +1,5 @@
 <?php
 require_once "../users/connection.php";
-include 'connect.php';
 
 if (isset($_POST['submit'])){
     $fio = $_POST['FIO'];
@@ -13,14 +12,14 @@ if (isset($_POST['submit'])){
     $branch_id = $_POST['branch_id'];
 
     $sql = "insert into `employees`(fio,phone,address,passport,sana ,branch_id) values ('$fio','$phone','$address','$passport','$sana','$branch_id')";
-    $result = mysqli_query($con,$sql);
+    $result = mysqli_query($connection,$sql);
     if ($result){
 //         echo 'yuborildi';
         header('location:ishchilar.php');
 
     }
     else{
-        die(mysqli_error($con));
+        die(mysqli_error($connection));
     }
 }
 

@@ -1,9 +1,8 @@
 <?php
 require_once "../users/connection.php";
-include 'connect.php';
 $id = $_GET['updateid'];
 $sql = "Select * from `employees` where id =$id";
-$result = mysqli_query($con,$sql);
+$result = mysqli_query($connection,$sql);
 $row = mysqli_fetch_assoc($result);
 $id = $row['id'];
 $fio = $row['fio'];
@@ -22,14 +21,14 @@ if (isset($_POST['submit'])){
     $branch_id = $_POST['branch_id'];
 
     $sql = "update `employees` set id=$id,fio ='$fio',phone = '$phone',address='$address',passport = '$passport',sana='$sana' where id=$id";
-    $result = mysqli_query($con,$sql);
+    $result = mysqli_query($connection,$sql);
     if ($result){
         // echo 'yuborildi';
         header('location:ishchilar.php');
 
     }
     else{
-        die(mysqli_error($con));
+        die(mysqli_error($connection));
     }
 }
 
