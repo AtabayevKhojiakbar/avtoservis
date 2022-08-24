@@ -1,6 +1,6 @@
 <?php
 require_once "connection.php";
-$location='../navbar.php';
+$location='../customers/index.php';
 $a=false;
 $name="";
 $email="";
