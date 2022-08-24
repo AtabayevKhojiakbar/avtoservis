@@ -2,7 +2,7 @@
 $server='localhost';
 $user="root";
 $password="";
-$DataBase="AvtoServis";
+$DataBase="avtoservis";
 $connection=mysqli_connect("$server","$user","$password","$DataBase");
 if(!$connection)
 {

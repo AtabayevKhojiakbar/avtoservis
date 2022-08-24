@@ -159,7 +159,14 @@ include "../nav.php";
                     <th><?php echo $rows['status']; ?></th>
                     <th><?php echo $rows['bonus']; ?></th>
                     <th><?php echo $rows['date']; ?></th>
+                    <?php $rs=mysqli_fetch_array($result) ?>
                     <th>
+                        <script>
+                            var a;
+                            a=<?php echo json_encode($rs)?> ;
+                            console.log(a);
+
+                        </script>
                         <button onclick=""  class="btn btn-warning" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal3">
 kkk
                         </button>
