@@ -1,12 +1,18 @@
 <?php
 
 require_once "../users/connection.php";
+$ishladi = false;
+$message = '';
 
 if(isset($_POST['name'])){
+    $ishladi = true;
     $name = $_POST['name'];
     $price = $_POST['price'];
     $sql = "INSERT INTO prices(name,price) values ('$name','$price')";
-    mysqli_query($connection,$sql);
+    $ishladi = mysqli_query($connection,$sql);
+    if($ishladi){
+        $message = "Ma'lumot qo'shildi";
+    }
 }
 
 ?>
@@ -43,6 +49,15 @@ if(isset($_POST['name'])){
                 <button type="submit" class="btn btn-primary">Ma'lumot qo'shish</button>
 
             </form>
+
+        <?php
+        if($ishladi){
+        ?>
+        <h3 class="text"><?php echo $message ?></h3>
+        <?php
+        }
+        ?>
+
     </div>
 </div>
 
