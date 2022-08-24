@@ -1,5 +1,6 @@
 <?php
 include 'connect.php';
+include '../nav.php'
 ?>
 
 <!DOCTYPE html>
