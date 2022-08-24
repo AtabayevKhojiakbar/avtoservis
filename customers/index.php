@@ -44,7 +44,7 @@ include "../nav.php";
                         <div class="mb-3" class="container">
                             <div class="mb-3">
                                 <label class="container">Car number</label>
-                                <input type="text" class="form-control"  name="car_number">
+                                <input type="text" class="form-control"  required name="car_number">
                             </div>
                             <div class="mb-3">
                                 <label class="container">
@@ -102,7 +102,8 @@ include "../nav.php";
                         <label style="padding-right: 30px">Summani kiriting</label><br>
                         <input type="text" name="summa" class="form-control">
                         <input type="hidden"  id="nani_idsi" name="id"  class="form-control">
-                        <button type="submit"  class="btn btn-success" style="margin-left: 75%">Saqlash</button>
+                        <input type="hidden" id="narx" name="narx" class="form-control"><br>
+                        <button type="submit"  class="btn btn-success" style="margin-left: 88%">Yuborish</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -170,7 +171,7 @@ include "../nav.php";
                         <button onclick=""  class="btn btn-warning" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal3">
 kkk
                         </button>
-                        <button onclick="idniYubor(<?php echo $rows['id']; ?>)"  class="btn btn-primary" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <button onclick="idniYubor(<?php echo $rows['id'].",".$rows['payedsum']; ?>)"  class="btn btn-primary" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
                                 <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
                                 <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
@@ -187,9 +188,10 @@ kkk
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <script>
-    function idniYubor(id){
+    function idniYubor(id, narx){
         console.log(id);
         document.getElementById('nani_idsi').value=id;
+        document.getElementById('narx').value=narx;
     }
 
 </script>
