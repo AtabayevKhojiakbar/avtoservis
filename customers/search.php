@@ -3,7 +3,7 @@
     $message='';
     if(isset($_POST['id'])){
         $id = $_POST['id'];
-        $sql = "select prices.price, customers.car_number, employees.fio, customers.sale, customers.payedsum from customers,employees,prices  where customers.id='$id' ";
+        $sql = "select customers.paysum, customers.car_number, employees.fio, customers.sale, customers.payedsum from customers,employees,prices  where customers.id='$id' ";
         $result = mysqli_query($connection, $sql);
         $row = mysqli_fetch_assoc($result);
         $payedsum = $row['payedsum'];
@@ -46,7 +46,7 @@
         </h3>
         <h3 style="padding-left: 45px; padding-top: 10px;">
             <label style="padding-right: 30px">Servis narxi:</label>
-            <label><?php echo $row['price']; ?></label>
+            <label><?php echo $row['paysum']; ?></label>
         </h3>
         <h3 style="padding-left: 45px; padding-top: 10px;">
             <label style="padding-right: 30px">Chegirma:</label>
@@ -54,7 +54,7 @@
         </h3>
         <h3 style="padding-left: 45px; padding-top: 10px;">
             <label style="padding-right: 30px">Servis narxi chegirma bilan:</label>
-            <input style="border: solid 0px;" name="tolov" value="<?php echo $row['price']-$row['price']*$row['sale']/100; ?>">
+            <input style="border: solid 0px;" name="tolov" value="<?php echo $row['paysum']-$row['paysum']*$row['sale']/100; ?>">
         </h3>
         <h3 style="padding-left: 45px; padding-top: 10px;">
             <label style="padding-right: 30px">Holat:</label>
