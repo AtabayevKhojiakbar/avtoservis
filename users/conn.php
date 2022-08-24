@@ -3,8 +3,8 @@ $server='localhost';
 $user="root";
 $password="";
 $DataBase="AvtoServis";
-$connection=mysqli_connect("$server","$user","$password","$DataBase");
-if(!$connection)
+$conn=mysqli_connect("$server","$user","$password","$DataBase");
+if(!$conn)
 {
     die("Xatolik".mysqli_connect_error());
 }
