@@ -1,6 +1,6 @@
 <?php
     require_once "../users/connection.php";
-
+// narx tolash
     if(isset($_POST['id'])) {
         $a=$_POST['id'];
         if ($_POST['summa'] >= $_POST['narx']) {
@@ -15,6 +15,21 @@
             $message="Yetarli summa kiritilmadi!";
         }
     }
+    //avto raqam ozgartirish
+    if(isset($_POST['id_edit'])){
+        $edit_id=$_POST['id_edit'];
+        $edit_name=$_POST['name_edit'];
+        $sql = "update customers set car_number='$edit_name' where id='$edit_id';";
+        $result = mysqli_query($connection,$sql);
+        $xabar = "Avto raqam yangilandi!";
+        $bl = true;
+    }
+    else{
+        $xabar = "Xatolik!";
+        $bl = false;
+    }
+
+
     $sql = "select customers.*,employees.fio,prices.name 
     from customers inner join employees on 
         customers.employee_id=employees.id 
@@ -127,20 +142,24 @@ include "../nav.php";
         </div>
     </div>
     <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button>
+                    <h5 class="modal-title" id="exampleModalLabel">Mashina raqami</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" >
+                <div class="modal-body">
                     <form action="" method="post">
-                        <input type="text" class="form-control m-3" id="m_raqam"  name="m_raqam">
-                        <input type="hidden" class="form-control m-3" id="m_id"  name="m_id">
-                        <button type="submit"  class="btn btn-success form-control w-25 m-3" style="">Saqlash</button>
+                        <input type="hidden" name="id_edit" id="edit_id">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">AvtoRaqam</label>
+                            <input type="text" name="name_edit" class="form-control" id="name_edit" >
+                        </div>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger"  data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -179,8 +198,10 @@ include "../nav.php";
                     <th><?php echo $rows['date']; ?></th>
                     <?php $rs=mysqli_fetch_array($result) ?>
                     <th>
-                        <button onclick="click(<?php echo $rows['id'];?>)"  class="btn btn-warning" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal3">
-kk
+                        <button onclick="edit(<?php echo $rows['id'] ?>)"  class="btn btn-warning" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                            </svg>
                         </button>
                         <button onclick="idniYubor(<?php echo $rows['id'];?>)"  class="btn btn-primary" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
@@ -206,7 +227,11 @@ kk
     }
     function click(id){
         document.getElementById('m_id').value=id;
-        document.getElementById('m_raqam').value=a[id]['car_number'];
+        document.getElementById('raqam_m').value=a[id]['car_number'];
+    }
+    function edit(id){
+        document.getElementById('edit_id').value=id;
+        document.getElementById('name_edit').value=a[id]['car_number'];
     }
 </script>
 <?php
@@ -217,6 +242,18 @@ if(isset($a)){
     else{ ?>
         <script>alert("Yetarli summa kiritilmadi!");</script>
         <?php
+    }
+}
+if(isset($edit_id)){
+    if ($bl){
+        ?>
+        <script>alert(<?php echo $xabar;?>);</script>
+<?php
+    }
+    else{
+        ?>
+        <script>alert(<?=$xabar?>);</script>
+<?php
     }
 }
 ?>
