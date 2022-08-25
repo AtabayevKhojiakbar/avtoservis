@@ -1,10 +1,25 @@
 <?php
-require_once "../users/connection.php";
-$sql = "select customers.*,employees.fio,prices.name 
-from customers inner join employees on 
-    customers.employee_id=employees.id 
-    INNER JOIN prices on prices.id=customers.price_id; ";
-$result = mysqli_query($connection, $sql);
+    require_once "../users/connection.php";
+
+    if(isset($_POST['id'])) {
+        $a=$_POST['id'];
+        if ($_POST['summa'] >= $_POST['narx']) {
+            $id = $_POST['id'];
+            $summa = $_POST['summa'];
+            $sql = "update customers set status=1 where id='$id'";
+            $natija = mysqli_query($connection, $sql);
+            $bool = true;
+            $message="To'landi!";
+        } else {
+            $bool = false;
+            $message="Yetarli summa kiritilmadi!";
+        }
+    }
+    $sql = "select customers.*,employees.fio,prices.name 
+    from customers inner join employees on 
+        customers.employee_id=employees.id 
+        INNER JOIN prices on prices.id=customers.price_id; ";
+    $result = mysqli_query($connection, $sql);
 ?>
 <!doctype html>
 <html lang="en">
@@ -28,7 +43,6 @@ include "../nav.php";
             <button  class="btn btn-success" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Qo`shish
             </button>
-
         </div>
     </div>
 
@@ -98,12 +112,12 @@ include "../nav.php";
                     <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button>
                 </div>
                 <div class="modal-body" >
-                    <form action="tolov.php" method="post">
+                    <form action="" method="post">
                         <label style="padding-right: 30px">Summani kiriting</label><br>
                         <input type="text" name="summa" class="form-control">
                         <input type="hidden"  id="nani_idsi" name="id"  class="form-control">
                         <input type="hidden" id="narx" name="narx" class="form-control"><br>
-                        <button type="submit"  class="btn btn-success" style="margin-left: 88%">Yuborish</button>
+                        <button type="submit"  class="btn btn-success" style="margin-left: 88%" >Yuborish</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -120,7 +134,8 @@ include "../nav.php";
                 </div>
                 <div class="modal-body" >
                     <form action="" method="post">
-                        <input type="text" class="form-control m-3" id="m_raqamzz" value="zz" name="m_raqam">
+                        <input type="text" class="form-control m-3" id="m_raqam"  name="m_raqam">
+                        <input type="hidden" class="form-control m-3" id="m_id"  name="m_id">
                         <button type="submit"  class="btn btn-success form-control w-25 m-3" style="">Saqlash</button>
                     </form>
                 </div>
@@ -130,7 +145,6 @@ include "../nav.php";
             </div>
         </div>
     </div>
-
     <table class="table table-bordered border-1 table-striped table-hover ">
         <tr>
             <th scope="col">#</th>
@@ -141,13 +155,14 @@ include "../nav.php";
             <th scope="col">Chegirma</th>
             <th scope="col">To'langan</th>
             <th scope="col">Status</th>
-            <th scope="col">Bonus</th>
+            <th scope="col">Holat</th>
             <th scope="col">Sana</th>
             <th scope="col">Amal</th>
 
         </tr>
         <?php if ($result->num_rows > 0) {
             while ($rows = mysqli_fetch_assoc($result)) {
+                $usersArray[$rows['id']]=(object)$rows;
                 ?>
                 <tr>
                     <th><?php echo $rows['id']; ?></th>
@@ -158,20 +173,16 @@ include "../nav.php";
                     <th><?php echo $rows['sale']; ?></th>
                     <th><?php echo $rows['payedsum']; ?></th>
                     <th><?php echo $rows['status']; ?></th>
-                    <th><?php echo $rows['bonus']; ?></th>
+                    <th><?php if($rows['status']==1){echo "To'langan";}
+                                else echo "To'lanmagan";    ?>
+                    </th>
                     <th><?php echo $rows['date']; ?></th>
                     <?php $rs=mysqli_fetch_array($result) ?>
                     <th>
-                        <script>
-                            var a;
-                            a=<?php echo json_encode($rs)?> ;
-                            console.log(a);
-
-                        </script>
-                        <button onclick=""  class="btn btn-warning" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal3">
-kkk
+                        <button onclick="click(<?php echo $rows['id'];?>)"  class="btn btn-warning" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal3">
+kk
                         </button>
-                        <button onclick="idniYubor(<?php echo $rows['id'].",".$rows['payedsum']; ?>)"  class="btn btn-primary" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <button onclick="idniYubor(<?php echo $rows['id'];?>)"  class="btn btn-primary" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
                                 <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
                                 <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
@@ -188,12 +199,26 @@ kkk
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <script>
-    function idniYubor(id, narx){
-        console.log(id);
+    var a=<?php echo json_encode($usersArray)?>;
+    function idniYubor(id){
         document.getElementById('nani_idsi').value=id;
-        document.getElementById('narx').value=narx;
+        document.getElementById('narx').value=a[id]['payedsum'];
     }
-
+    function click(id){
+        document.getElementById('m_id').value=id;
+        document.getElementById('m_raqam').value=a[id]['car_number'];
+    }
 </script>
+<?php
+if(isset($a)){
+    if($bool){ ?>
+        <script>alert("Xizmat narxi to'landi!");</script>
+    <?php   }
+    else{ ?>
+        <script>alert("Yetarli summa kiritilmadi!");</script>
+        <?php
+    }
+}
+?>
 </body>
 </html>
