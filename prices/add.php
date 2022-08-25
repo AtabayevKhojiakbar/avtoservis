@@ -3,10 +3,10 @@
 require_once "../users/connection.php";
 
 
-if(isset($_POST['name'])){
+if(isset($_POST['submit'])){
     $ishladi = true;
-    $name = $_POST['name'];
-    $price = $_POST['price'];
+    $name = $_POST['xizmat'];
+    $price = $_POST['narxi'];
     $sql = "INSERT INTO prices(name,price) values ('$name','$price')";
     $result = mysqli_query($connection,$sql);
     if($result){
@@ -16,6 +16,8 @@ if(isset($_POST['name'])){
         echo mysqli_error();
     }
 }
+
+header('location:index.php');
 
 ?>
 
@@ -39,7 +41,7 @@ if(isset($_POST['name'])){
             <form action="" method="post" class="w-50">
 
                 <div class="mb-3">
-                    <label  class="form-label">Nomi</label>
+                    <label  class="form-label">Xizmat turi</label>
                     <input type="text" class="form-control" required name="name" >
                 </div>
 
