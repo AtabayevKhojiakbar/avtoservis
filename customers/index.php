@@ -1,10 +1,25 @@
 <?php
-require_once "../users/connection.php";
-$sql = "select customers.*,employees.fio,prices.name 
-from customers inner join employees on 
-    customers.employee_id=employees.id 
-    INNER JOIN prices on prices.id=customers.price_id; ";
-$result = mysqli_query($connection, $sql);
+    require_once "../users/connection.php";
+
+    if(isset($_POST['id'])) {
+        $a=$_POST['id'];
+        if ($_POST['summa'] >= $_POST['narx']) {
+            $id = $_POST['id'];
+            $summa = $_POST['summa'];
+            $sql = "update customers set status=1 where id='$id'";
+            $natija = mysqli_query($connection, $sql);
+            $bool = true;
+            $message="To'landi!";
+        } else {
+            $bool = false;
+            $message="Yetarli summa kiritilmadi!";
+        }
+    }
+    $sql = "select customers.*,employees.fio,prices.name 
+    from customers inner join employees on 
+        customers.employee_id=employees.id 
+        INNER JOIN prices on prices.id=customers.price_id; ";
+    $result = mysqli_query($connection, $sql);
 ?>
 <!doctype html>
 <html lang="en">
@@ -28,7 +43,6 @@ include "../nav.php";
             <button  class="btn btn-success" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Qo`shish
             </button>
-
         </div>
     </div>
 
@@ -98,12 +112,12 @@ include "../nav.php";
                     <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button>
                 </div>
                 <div class="modal-body" >
-                    <form action="tolov.php" method="post">
+                    <form action="" method="post">
                         <label style="padding-right: 30px">Summani kiriting</label><br>
                         <input type="text" name="summa" class="form-control">
                         <input type="hidden"  id="nani_idsi" name="id"  class="form-control">
                         <input type="hidden" id="narx" name="narx" class="form-control"><br>
-                        <button type="submit"  class="btn btn-success" style="margin-left: 88%">Yuborish</button>
+                        <button type="submit"  class="btn btn-success" style="margin-left: 88%" >Yuborish</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -130,7 +144,6 @@ include "../nav.php";
             </div>
         </div>
     </div>
-
     <table class="table table-bordered border-1 table-striped table-hover ">
         <tr>
             <th scope="col">#</th>
@@ -141,7 +154,7 @@ include "../nav.php";
             <th scope="col">Chegirma</th>
             <th scope="col">To'langan</th>
             <th scope="col">Status</th>
-            <th scope="col">Bonus</th>
+            <th scope="col">Holat</th>
             <th scope="col">Sana</th>
             <th scope="col">Amal</th>
 
@@ -158,7 +171,9 @@ include "../nav.php";
                     <th><?php echo $rows['sale']; ?></th>
                     <th><?php echo $rows['payedsum']; ?></th>
                     <th><?php echo $rows['status']; ?></th>
-                    <th><?php echo $rows['bonus']; ?></th>
+                    <th><?php if($rows['status']==1){echo "To'langan";}
+                                else echo "To'lanmagan";    ?>
+                    </th>
                     <th><?php echo $rows['date']; ?></th>
                     <?php $rs=mysqli_fetch_array($result) ?>
                     <th>
@@ -193,7 +208,17 @@ kkk
         document.getElementById('nani_idsi').value=id;
         document.getElementById('narx').value=narx;
     }
-
 </script>
+<?php
+if(isset($a)){
+    if($bool){ ?>
+        <script>alert("Xizmat narxi to'landi!");</script>
+    <?php   }
+    else{ ?>
+        <script>alert("Yetarli summa kiritilmadi!");</script>
+        <?php
+    }
+}
+?>
 </body>
 </html>
